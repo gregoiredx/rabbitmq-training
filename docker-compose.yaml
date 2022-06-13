@@ -15,4 +15,3 @@ services:
       NODE_TO_JOIN: rabbit@server-1
     depends_on:
       - server-1
-
