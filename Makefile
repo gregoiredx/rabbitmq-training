@@ -6,7 +6,7 @@ build:
 
 .PHONY: run
 run: build
-	docker run --rm -ti -p 5672:5672  $(PROJECT):latest
+	docker run --rm -ti -p 5672:5672 -p 15672:15672  $(PROJECT):latest
 
 venv:
 	python -m venv venv

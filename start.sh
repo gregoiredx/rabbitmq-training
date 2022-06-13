@@ -1,6 +1,7 @@
 #!/bin/bash
 set -m
 rabbitmq-server &
+sleep 5
 rabbitmqctl await_startup
 rabbitmqctl add_user full_access test
 rabbitmqctl set_user_tags full_access "administrator"
