@@ -24,7 +24,7 @@ else
   sleep 10
   rabbitmqctl stop_app
   rabbitmqctl reset
-  rabbitmqctl join_cluster $NODE_TO_JOIN
+  rabbitmqctl join_cluster "$NODE_TO_JOIN"
   rabbitmqctl start_app
 fi
 
