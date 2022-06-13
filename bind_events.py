@@ -1,3 +1,10 @@
+"""
+This requires the following server conf:
+
+rabbitmq-plugins enable rabbitmq_event_exchange
+rabbitmq-plugins enable rabbitmq_tracing
+rabbitmqctl trace_on
+"""
 from lib import channel, connection
 
 channel.queue_declare(
