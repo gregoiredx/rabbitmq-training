@@ -3,6 +3,9 @@ set -m
 set -x
 set -e
 
+echo -n "$RABBIT_COOKIE" > /var/lib/rabbitmq/.erlang.cookie
+chmod ag-rwx /var/lib/rabbitmq/.erlang.cookie
+
 rabbitmq-server &
 
 sleep 5
@@ -14,15 +17,15 @@ rabbitmq-plugins enable rabbitmq_event_exchange
 rabbitmq-plugins enable rabbitmq_tracing
 rabbitmqctl trace_on
 
-if [[ "$SECONDARY_NODE" == "true" ]]
+if [[ "$NODE_TO_JOIN" == "" ]]
 then
-  echo "############# JOINING CLUSTER rabbit@rabbitmq-training-server-1"
+  echo "############# MAIN NODE STARTED $RABBITMQ_NODENAME"
+else
+  echo "############# NODE $RABBITMQ_NODENAME JOINING $NODE_TO_JOIN"
   rabbitmqctl stop_app
   rabbitmqctl reset
-  rabbitmqctl join_cluster rabbit@rabbitmq-training-server-1
+  rabbitmqctl join_cluster rabbit@server-1
   rabbitmqctl start_app
-else
-  echo "############# MAIN NODE STARTING rabbit@rabbitmq-training-server-1"
 fi
 
 fg %1

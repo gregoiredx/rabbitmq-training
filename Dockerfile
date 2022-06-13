@@ -1,10 +1,6 @@
 FROM rabbitmq:latest
-RUN apt update && apt install -y vim
 EXPOSE 5672
 EXPOSE 15671 15672
 ADD start.sh "/start.sh"
 RUN chmod +x /start.sh
-
-ENV RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS="-setcookie WERDNGTWUNQDGEWOTCWS"
-ENV RABBITMQ_ERLANG_COOKIE=WERDNGTWUNQDGEWOTCWS
 CMD "/start.sh"
