@@ -1,6 +1,6 @@
 services:
   server-1:
-    build: .
+    build: docker
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -10,16 +10,16 @@ services:
     secrets:
       - shared-cookie
   server-2:
-    build: .
+    build: docker
     hostname: server-2
     secrets:
       - shared-cookie
   server-3:
-    build: .
+    build: docker
     hostname: server-3
     secrets:
       - shared-cookie
 
 secrets:
   shared-cookie:
-    file: ./shared-cookie
+    file: ./docker/shared-cookie

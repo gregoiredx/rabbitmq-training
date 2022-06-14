@@ -1,7 +1,5 @@
 #!/bin/bash
-set -m
-set -x
-set -e
+set -mxe
 
 cp /run/secrets/shared-cookie /var/lib/rabbitmq/.erlang.cookie
 chmod 400 /var/lib/rabbitmq/.erlang.cookie
