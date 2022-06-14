@@ -1,12 +1,10 @@
 import pika
 
-from lib import channel
+from lib import channel, connection
 
 
 def on_message_callback(_channel, method_frame, header_frame, body):
-    print(method_frame.delivery_tag)
-    print(body)
-    print()
+    print(f"Message received: {method_frame.delivery_tag} {body}")
     _channel.basic_ack(delivery_tag=method_frame.delivery_tag)
 
 
@@ -16,4 +14,4 @@ try:
     channel.start_consuming()
 except KeyboardInterrupt:
     channel.stop_consuming()
-connection.close()
+    connection.close()
