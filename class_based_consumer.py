@@ -10,25 +10,17 @@ class Consumer:
         self.channel = channel
         self.queue = queue
 
-    def on_message_callback(
-        self,
-        _channel: BlockingChannel,
-        method: spec.Basic.Deliver,
-        properties: spec.BasicProperties,
-        body: bytes,
-    ) -> None:
-        self.handle_message(body)
-        _channel.basic_ack(delivery_tag=method.delivery_tag)
-
     def handle_message(self, body: bytes) -> None:
         raise NotImplemented
 
     def start_consuming(self) -> None:
-        self.channel.basic_consume(self.queue, self.on_message_callback)
-        self.channel.start_consuming()
+        # see https://github.com/pika/pika/blob/main/docs/examples/blocking_consumer_generator.rst
+        for method_frame, properties, body in self.channel.consume(self.queue):
+            self.handle_message(body)
+            self.channel.basic_ack(delivery_tag=method_frame.delivery_tag)
 
     def stop_consuming(self) -> None:
-        self.channel.stop_consuming()
+        self.channel.cancel()
 
 
 class PrintMessageConsumer(Consumer):
