@@ -5,8 +5,6 @@ services:
       - "5672:5672"
       - "15672:15672"
     hostname: server-1
-    environment:
-      RUN_CMDS: true
     secrets:
       - shared-cookie
   server-2:
