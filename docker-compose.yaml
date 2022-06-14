@@ -7,11 +7,14 @@ services:
     environment:
       RABBITMQ_NODENAME: rabbit@server-1
       RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
+      RUN_CMDS: true
   server-2:
     build: .
     environment:
       RABBITMQ_NODENAME: rabbit@server-2
       RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
-      NODE_TO_JOIN: rabbit@server-1
-    depends_on:
-      - server-1
+  server-3:
+    build: .
+    environment:
+      RABBITMQ_NODENAME: rabbit@server-3
+      RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
