@@ -4,17 +4,17 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    hostname: server-1
     environment:
-      RABBITMQ_NODENAME: rabbit@server-1
       RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
       RUN_CMDS: true
   server-2:
     build: .
+    hostname: server-2
     environment:
-      RABBITMQ_NODENAME: rabbit@server-2
       RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
   server-3:
     build: .
+    hostname: server-3
     environment:
-      RABBITMQ_NODENAME: rabbit@server-3
       RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
