@@ -20,5 +20,5 @@ stop-cluster:
 
 .PHONY: run-cluster
 run-cluster: stop-cluster
-	$(info After startup, you should be able to login with guest/guest on http://localhost:15672)
 	docker-compose up -d --build
+	$(info After startup, you should be able to login with guest/guest on http://localhost:15672)
