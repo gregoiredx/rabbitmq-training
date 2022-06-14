@@ -6,15 +6,10 @@ set -e
 cp /run/secrets/shared-cookie /var/lib/rabbitmq/.erlang.cookie
 chmod 400 /var/lib/rabbitmq/.erlang.cookie
 
+export RABBITMQ_PID_FILE=/var/run/rabbitmq/pid
 rabbitmq-server &
-
-sleep 10
-if [[ "$RUN_CMDS" == "true" ]]
-then
-  rabbitmqctl await_startup
-  rabbitmq-plugins enable rabbitmq_event_exchange
-  rabbitmq-plugins enable rabbitmq_tracing
-  rabbitmqctl trace_on
-fi
+rabbitmqctl wait /var/run/rabbitmq/pid
+rabbitmqctl await_startup
+rabbitmqctl trace_on
 
 fg %1
