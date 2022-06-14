@@ -6,15 +6,20 @@ services:
       - "15672:15672"
     hostname: server-1
     environment:
-      RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
       RUN_CMDS: true
+    secrets:
+      - shared-cookie
   server-2:
     build: .
     hostname: server-2
-    environment:
-      RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
+    secrets:
+      - shared-cookie
   server-3:
     build: .
     hostname: server-3
-    environment:
-      RABBIT_COOKIE: WERDNGTWUNQDGEWOTCWS
+    secrets:
+      - shared-cookie
+
+secrets:
+  shared-cookie:
+    file: ./shared-cookie

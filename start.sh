@@ -3,8 +3,8 @@ set -m
 set -x
 set -e
 
-echo -n "$RABBIT_COOKIE" > /var/lib/rabbitmq/.erlang.cookie
-chmod ag-rwx /var/lib/rabbitmq/.erlang.cookie
+cp /run/secrets/shared-cookie /var/lib/rabbitmq/.erlang.cookie
+chmod 400 /var/lib/rabbitmq/.erlang.cookie
 
 rabbitmq-server &
 
